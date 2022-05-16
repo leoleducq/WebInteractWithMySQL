@@ -1,10 +1,10 @@
 <?php
 //---------------------Connexion à la BDD---------------
-function connect_request()//Pour le requetes
+function connect_request()//Pour les requetes
 {
     try
     {
-        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        $db = new PDO('mysql:host=****;port=****;dbname=****;charset=utf8', 'user', 'password',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {
@@ -12,11 +12,11 @@ function connect_request()//Pour le requetes
     }
     return $db;
 }
-function connect_user()//Pour le requetes
+function connect_user()//Pour se connecter
 {
     try
     {
-        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        $db = new PDO('mysql:host=****;port=****;dbname=****;charset=utf8', 'user', 'password',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {
