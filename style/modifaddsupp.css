@@ -1,0 +1,23 @@
+div,p,header,h1,select,table{
+    text-align: center;
+}
+
+td{
+    border:solid;
+    background-color: lightgrey;
+}
+
+/*------------Tableau----------------*/
+table{
+    border:solid;
+    margin:auto;
+}
+#colonne{
+    background-color:lightskyblue;
+}
+
+/*----------Bouton-------------*/
+form{
+    text-align: center;
+    margin-top:10px;
+}
