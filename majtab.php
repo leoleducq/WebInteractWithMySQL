@@ -50,17 +50,23 @@
             //Nouveau compteur pour mettre le numéro de la station
             $cpt = 0;
             foreach($tables as $showtable){
+                //Récupération de la config
+                $conf = get_config();
+                //Prend la variable de la base de données sur laquelle faire les requêtes
+                $database = $conf['db_request'];
+                //Voir les tables de la BDD
+                $showtable = $showtable["Tables_in_$database"];
                 //Incrémentation du compteur
                 $cpt++;
                 //Permet de garder en sélection la table choisie
-                if($_GET['table'] == $showtable['Tables_in_test'])
+                if($_GET['table'] == $showtable)
                 {
                     ?>
-                    <option selected="true" value="<?php echo strtolower($showtable['Tables_in_test']); ?>"><?php echo $cpt.".".$showtable['Tables_in_test'];?></option>
+                    <option selected="true" value="<?php echo strtolower($showtable); ?>"><?php echo $cpt.".".$showtable;?></option>
                     <?php
                 }else{
                     ?>
-                    <option value="<?php echo strtolower($showtable['Tables_in_test']); ?>"><?php echo $cpt.".".$showtable['Tables_in_test'];?></option>
+                    <option value="<?php echo strtolower($showtable); ?>"><?php echo $cpt.".".$showtable;?></option>
                 <?php
                 }
             }

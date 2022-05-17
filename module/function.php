@@ -1,10 +1,30 @@
 <?php
+
+function get_config()
+{
+    //Récupération des variables dans le fichier de config
+    $connect = file('config.cfg');
+    foreach($connect as $line)
+    {
+        $pos = strpos($line, '=');
+        $conf[trim(substr($line,0,$pos))] = trim(substr($line, $pos+1));
+    }
+    return $conf;
+}
 //---------------------Connexion à la BDD---------------
-function connect_request()//Pour le requetes
+function connect_request()//Pour les requetes
 {
     try
     {
-        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        //Appel de la fonction pour récupérer le dictionnaire
+        $conf = get_config();
+        //Récupération des variables
+        $host=$conf['host_request'];
+        $port=$conf['port_request'];
+        $database=$conf['db_request'];
+        $user=$conf['user_request'];
+        $pwd=$conf['pwd_request'];
+        $db = new PDO("mysql:host=$host;port=$port;dbname=$database;charset=utf8", "$user", "$pwd",[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {
@@ -12,11 +32,19 @@ function connect_request()//Pour le requetes
     }
     return $db;
 }
-function connect_user()//Pour le requetes
+function connect_user()//Pour se connecter
 {
     try
     {
-        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        //Appel de la fonction pour récupérer le dictionnaire
+        $conf = get_config();
+        //Récupération des variables
+        $host=$conf['host_user'];
+        $port=$conf['port_user'];
+        $database=$conf['db_user'];
+        $user=$conf['user_user'];
+        $pwd=$conf['pwd_user'];
+        $db = new PDO("mysql:host=$host;port=$port;dbname=$database;charset=utf8", "$user", "$pwd",[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {

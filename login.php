@@ -8,10 +8,6 @@ if(isset($_POST['username']) && isset($_POST['password']))
     require "module/function.php";
     //Connexion à la BDD
     $db = connect_user();
-    // on applique les deux fonctions mysqli_real_escape_string et htmlspecialchars
-    // pour éliminer toute attaque de type injection SQL et XSS
-    // $username = mysqli_real_escape_string($db,htmlspecialchars($_POST['username'])); 
-    // $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password']));
     $username = $_POST['username'];
     $password = $_POST['password'];
     if($username !== "" && $password !== "")
