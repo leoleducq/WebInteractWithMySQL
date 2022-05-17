@@ -128,7 +128,7 @@
             {
                 //-----Ouverture du fichier des dépendances------
                 //Nom du fichier
-                $filename = "dependances des tables";
+                $filename = "specific_rules";
                 //Ouverture du fichier en mode lecture
                 $fp = fopen($filename, "r");
                 //Parcourt les lignes une à une
