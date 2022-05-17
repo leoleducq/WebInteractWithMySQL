@@ -35,6 +35,19 @@
     $requete = $db->prepare("DELETE FROM $table WHERE $primary_key = '$primary_value'");
     //Variable pour montrer la reqûete à l'utilisateur
     $show_requete = "DELETE FROM $table WHERE $primary_key = '$primary_value'";
+    //Requête pour récuperer le nom des colonnes
+    $colonnes = colonne_table($table,$db);
+    //Récupère le filtre
+    foreach($colonnes as $colonne)
+    {
+        $colonne = $colonne['Field'];
+        //Récupération des filtres et leurs valeurs
+        if(isset($_GET['filtre_'.$colonne]))
+        {
+            $nom_filtre = "filtre_$colonne";
+            $value_filtre = $_GET['filtre_'.$colonne];
+        }
+    }
     ?>
 
     
@@ -70,6 +83,16 @@
         try{
             $requete->execute();
             echo "<p>La ligne ayant $primary_key = $primary_value a bien été supprimée</p>";
+            foreach($colonnes as $colonne)
+            {
+                $colonne = $colonne['Field'];
+                //Récupération des filtres et leurs valeurs
+                if(isset($_GET['filtre_'.$colonne]))
+                {
+                    $nom_filtre = "filtre_$colonne";
+                    $value_filtre = $_GET['filtre_'.$colonne];
+                }
+            }
             header("Location: ../majtab.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre");
         }
         catch(Exception $e){
