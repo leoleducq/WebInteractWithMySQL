@@ -209,8 +209,8 @@
             <input type="hidden" name="table" value="<?php echo $table ;?>">
             <input type="hidden" name="nb_lignes" value="<?php echo $nb_lignes ;?>">
             <input type="hidden" name="nb_debut_ligne" value="<?php echo $nb_debut_ligne ;?>">
-            <input type="hidden" name="showtri" value="<?php echo $showtri ;?>">
-            <input type="hidden" name="tri" value="<?php echo $tri ;?>">
+            <input type="hidden" name="showtri" value="croissant">
+            <input type="hidden" name="tri" value="croissant">
             <input type="submit" id="reset" name="reset" value="Enlever les filtres">
             </div>
         </form>
