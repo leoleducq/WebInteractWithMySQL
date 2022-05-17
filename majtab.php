@@ -102,7 +102,7 @@
     <?php
 //-----------PERMET DE GENERER AUCUNE ERREUR LORSQU'ON ARRIVE SUR LA PAGE----------------------
 //Si l'utilisateur clique sur le bouton pour voir une table
-    if(isset($_GET['voirtable']) || isset($_GET['page']) || isset($_GET['quitter']) || isset($_GET['filtre']) || isset($_GET['showtri']))
+    if(isset($_GET['voirtable']) || isset($_GET['page']) || isset($_GET['quitter']) || isset($_GET['filtre']) || isset($_GET['showtri']) || isset($_GET['reset']))
     {
         //La variable table prend cette valeur (Table à afficher)
         $table = $_GET['table'];
@@ -181,7 +181,7 @@
         <p>Affichage des lignes <?php echo $nb_debut_ligne+1;?> - <?php echo $nb_debut_ligne+$nb_lignes ;?> (total de : <?php foreach($nb_total as $nb){ echo $nb['nb_total'];} ;?>)</p>
         <!--Choix du type de tri : Croissant / Décroissant-->
         <p>Ordre de tri</p>
-        <form action="" method)="GET">
+        <form action="" method="GET">
             <div>
             <input type="hidden" name="table" value="<?php echo $table ;?>">
             <input type="hidden" name="nb_lignes" value="<?php echo $nb_lignes ;?>">
@@ -204,6 +204,16 @@
             </div>
         </form> 
         <p>Colonne : <?php echo $tricolonne;?> | Tri : <?php echo $_GET['showtri'];?></p>
+        <form action="" method="GET">
+            <div>
+            <input type="hidden" name="table" value="<?php echo $table ;?>">
+            <input type="hidden" name="nb_lignes" value="<?php echo $nb_lignes ;?>">
+            <input type="hidden" name="nb_debut_ligne" value="<?php echo $nb_debut_ligne ;?>">
+            <input type="hidden" name="showtri" value="<?php echo $showtri ;?>">
+            <input type="hidden" name="tri" value="<?php echo $tri ;?>">
+            <input type="submit" id="reset" name="reset" value="Enlever les filtres">
+            </div>
+        </form>
         <!----------Compteur de lignes à afficher dans le tableau----------->
         <?php $cpt_ligne = $nb_debut_ligne+1;?>
 <!----------Début du tableau----------->
