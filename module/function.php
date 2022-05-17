@@ -1,10 +1,10 @@
 <?php
 //---------------------Connexion à la BDD---------------
-function connect_request()//Pour les requetes
+function connect_request()//Pour le requetes
 {
     try
     {
-        $db = new PDO('mysql:host=****;port=****;dbname=****;charset=utf8', 'user', 'password',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {
@@ -12,11 +12,11 @@ function connect_request()//Pour les requetes
     }
     return $db;
 }
-function connect_user()//Pour se connecter
+function connect_user()//Pour le requetes
 {
     try
     {
-        $db = new PDO('mysql:host=****;port=****;dbname=****;charset=utf8', 'user', 'password',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
+        $db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8', 'leo', 'leoadsbnetwork',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],);
     }
     catch (Exception $e)
     {
@@ -439,5 +439,6 @@ function modifier($db,$callsign,$fromairporticao,$toairporticao,$fromairportiata
     $final_request = "callsign='$callsign',routeicao='$routeicao',routeiata='$routeiata',$operator_request,flightnumber='',$final_request,nbroutestopsequences=0,vrsrouteid=0,updated='$current_date',updatedby='$user'";
     return $final_request;
 }
+
 ?>
 

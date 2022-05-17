@@ -10,6 +10,52 @@
     $showtri = $_GET['showtri'];
     //Texte pour le titre de la page
     $text = "$table, $primary_key = $primary_value";
+    //------------------Appel des fonctions--------------------
+    require "module/function.php";
+    //Connexion à la BDD
+    $db = connect_request();
+    //-------------------Préparation des requêtes------------------
+    //Requête pour récuperer le nom des colonnes
+    $colonnes = colonne_table($table,$db);
+    //Requête pour récupérer les tuples
+    $tuples = tuples($db,$table,$primary_key,$primary_value);
+
+//-------------------------------------Exécution de la requête------------------------------------
+    //Si l'utilisateur clique sur oui
+    if(isset($_GET['valider']) && $_GET['valider']=="Oui" && $_GET['utf_8'] == true)
+    {
+        //Récupération de la chaine $set
+        $set = $_GET['set'];
+        try{
+            //Requete d'update du tuple
+            $requete = $db->prepare("UPDATE $table SET $set WHERE $primary_key = '$primary_value'");
+            $requete->execute();
+            echo "<p>La ligne ayant $primary_key = $primary_value a bien été modifiée</p>";
+            foreach($colonnes as $colonne)
+            {
+                $colonne = $colonne['Field'];
+                //Récupération des filtres et leurs valeurs
+                if(isset($_GET['filtre_'.$colonne]))
+                {
+                    $nom_filtre = "filtre_$colonne";
+                    $value_filtre = $_GET['filtre_'.$colonne];
+                }
+            }
+            if(!isset($nom_filtre))//Si aucun filtre
+            {
+                $nom_filtre ="";
+                $value_filtre="";
+            }
+            header("Location: ../majtab.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre&primary_key=$primary_key&primary_value=$primary_value");
+        }
+        catch(Exeption $e){
+            die('Erreur : ' . $e->GETMessage());
+        }
+        
+    }
+    if(isset($_GET['valider']) && $_GET['valider'] == "Oui" && $_GET['utf_8'] == false){
+        echo "Une ou plusieurs colonnes ont des caractères non utf_8";
+    }
 ?>
     <head>
         <meta charset="utf-8" />
@@ -29,19 +75,6 @@
         {
             header("location:../login.php");
         }
-        //Récupération des variables dans l'URL
-        $table = $_GET['table'];
-        $primary_key = $_GET['primary_key'];
-        $primary_value = $_GET['primary_value'];
-        //------------------Appel des fonctions--------------------
-        require "module/function.php";
-        //Connexion à la BDD
-        $db = connect_request();
-        //-------------------Préparation des requêtes------------------
-        //Requête pour récuperer le nom des colonnes
-        $colonnes = colonne_table($table,$db);
-        //Requête pour récupérer les tuples
-        $tuples = tuples($db,$table,$primary_key,$primary_value);
     ?>
 
 <body>
@@ -244,6 +277,8 @@
     <input type="hidden" name="nb_lignes" value="<?php echo $nb_lignes;?>">
     <input type="hidden" name="showtri" value="<?php echo $showtri;?>">
     <input type="hidden" name="<?php echo $nom_filtre;?>" value="<?php echo $value_filtre;?>">
+    <input type="hidden" name="primary_key" value="<?php echo $primary_key;?>">
+    <input type="hidden" name="primary_value" value="<?php echo $primary_value;?>">
 </form>
 </div>
 <!----------------------------------------------------Fin du tableau-------------------------------------------------->
@@ -350,31 +385,7 @@
             echo "<p>Les colonnes : '$non_utf8' ont des caractères non utf_8.</p>";
         }
     }
-?>
-<?php
-//-------------------------------------Exécution de la requête------------------------------------
-    //Si l'utilisateur clique sur oui
-    if(isset($_GET['valider']) && $_GET['valider']=="Oui" && $_GET['utf_8'] == true)
-    {
-        //Récupération de la chaine $set
-        $set = $_GET['set'];
-        try{
-            //Requete d'update du tuple
-            $requete = $db->prepare("UPDATE $table SET $set WHERE $primary_key = '$primary_value'");
-            $requete->execute();
-            echo "<p>La ligne ayant $primary_key = $primary_value a bien été modifiée</p>";
-            header("Location: ../majtab.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre");
-        }
-        catch(Exeption $e){
-            die('Erreur : ' . $e->GETMessage());
-        }
-        
-    }
-    if(isset($_GET['valider']) && $_GET['valider'] == "Oui" && $_GET['utf_8'] == false){
-        echo "Une ou plusieurs colonnes ont des caractères non utf_8";
-    }
-?>
-        <!--Appel du code javascript--> 
+?>        <!--Appel du code javascript--> 
         <script src="../script/main.js"></script>
         
 </body>

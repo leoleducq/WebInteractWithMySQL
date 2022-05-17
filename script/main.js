@@ -19,6 +19,18 @@ function toggleFile(element)
     var toairporticao = document.getElementById("toairporticao");
     var fromairportiata = document.getElementById("fromairportiata");
     var toairportiata = document.getElementById("toairportiata");
+    // if(fromairporticao.value!=='') {fromairportiata.disabled = true}
+    // if(fromairporticao.value===''){fromairportiata.disabled = false};
+    // if(fromairportiata.value !== '') {fromairporticao.disabled = true}
+    // if(fromairportiata.value==='') {fromairporticao.disabled = false};
+    // if(toairporticao.value!=='') {toairportiata.disabled = true}
+    // if(toairporticao.value===''){toairportiata.disabled = false};
+    // if(toairportiata.value !== '') {toairporticao.disabled = true}
+    // if(toairportiata.value==='') {toairporticao.disabled = false};
+    // if(fromairporticao.value!=="") {fromairportiata.value=""};
+    // if(fromairportiata.value!="") {fromairporticao.value=""}
+    // if(toairporticao.value!=='') {toairportiata.value=""}
+    // if(toairportiata.value !== '') {toairporticao.value=""}
     if(element.id=="fromairporticao") {fromairportiata.value=""}
     if(element.id=="fromairportiata") {fromairporticao.value=""}
     if(element.id=="toairporticao") {toairportiata.value=""}

@@ -342,9 +342,19 @@
                     $cpt_ligne++;
                     //Itère sur chaque colonne une à une
                     while($cpt <= $nb_colonne):
-                        ?>
-                        <td><?php echo $tuple[$cpt]; ?></td>
-                        <?php
+                        //Permet de voir la dernière ligne a avoir été modifié ou ajouter
+                        if(isset($_GET['primary_value']) && $_GET['primary_value'] == $tuple[$primary_cpt])
+                        {
+                            ?>
+                            <td><div id="justupdate"><?php echo $tuple[$cpt]; ?></div></td>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <td><?php echo $tuple[$cpt]; ?></td>
+                            <?php
+                        }
                         $cpt++;
                     endwhile;
                 ?>
@@ -386,6 +396,7 @@
         <input type="hidden" name="nb_debut_ligne" value="<?php echo $nb_debut_ligne ;?>">
         <input type="hidden" name="nb_lignes" value="<?php echo $nb_lignes ;?>">
         <input type="hidden" name="showtri" value="<?php echo $showtri ;?>">
+        <input type="hidden" name="primary_key" value="<?php echo $primary_key ;?>">
         <?php
         //Permet de transmettre les filtres si il y en a
         foreach($colonnes as $colonne)
