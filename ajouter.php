@@ -236,7 +236,7 @@
         }
         ?>
     </form>
-    <form action="../bdd/majtab.php" method="GET">
+    <form action="majtab.php" method="GET">
     <!---Input de type Hidden de toutes les données préalablement transmises------->
         <input type="submit" name="quitter" value="Retour">
         <input type="hidden" name="table" value="<?php echo $table;?>">
