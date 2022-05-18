@@ -216,7 +216,7 @@
 
 <div id="bouton">
     <form action="" method="GET">
-    <input type="submit" name="click" value="Ajouter">
+    <input type="submit" name="add" value="Ajouter">
     <!---Input de type Hidden de toutes les données préalablement transmises------->
         <input type="hidden" name="table" value="<?php echo $table;?>">
         <input type="hidden" name="primary_key" value="<?php echo $primary_key;?>">
@@ -251,7 +251,7 @@
 
 <?php
     //Quand l'utilisateur clique sur le bouton ajouter
-    if(isset($_GET['click']))
+    if(isset($_GET['add']))
     {
         //Instanciation de la chaine a prendre en compte dans la requete
         $add = "";
@@ -260,6 +260,14 @@
         //Compteur de nombre de colonnes avec des valeurs non_utf_8
         $cpt_non_utf = 0;
         $non_utf8 = "";
+        //Récupère la liste des infos sur les types
+        $list_type = verif_type($colonnes,$table);
+        //Liste des champs n'ayant pas le bon type
+        $non_type = $list_type[0];
+        //Nombre de champs n'ayant pas le bon type
+        $cpt_non_type = $list_type[1];
+        //Booléen pour voir si il y a des mauvais types
+        $bool_type = $list_type[2];
         //Traitement spécial pour callsignsroutes
         if($table=="callsignsroutes")
         {
@@ -311,10 +319,10 @@
         //Enlève la dernière virgule de la chaine
         $add = rtrim($add, ", ");
         $non_utf8 = rtrim($non_utf8, ", ");
-
+        $non_type = rtrim($non_type,", ");
         $show_requete = "<b>INSERT INTO</b> $table <b>VALUES</b> ($add)";
 
-        if($utf_8 == true)
+        if($utf_8 == true && $bool_type == true)
         {
             ?>
             <!----Affichage du bouton pour valider la requête ou non------->
@@ -348,11 +356,20 @@
         </div>
 
     <?php
+        //Messages d'erreurs en cas de mauvais type ou non utf_8
         if($utf_8 == false && $cpt_non_utf == 1){
-            echo "<p>La colonne : '$non_utf8' a des caractères non utf_8.</p>";
+            echo "<p id='erreur'>La colonne : $non_utf8 a des caractères non utf_8.</p>";
         }
         if($utf_8 == false && $cpt_non_utf > 1){
-            echo "<p>Les colonnes : '$non_utf8' ont des caractères non utf_8.</p>";
+            echo "<p id='erreur'>Les colonnes : $non_utf8 ont des caractères non utf_8.</p>";
+        }
+        if($bool_type == false && $cpt_non_type == 1)
+        {
+            echo "<p id='erreur'>La colonne : $non_type a un mauvais type de valeur.</p>";
+        }
+        if($bool_type == false && $cpt_non_type > 1)
+        {
+            echo "<p id='erreur'>Les colonnes : $non_type ont des mauvais types de valeur.</p>";
         }
     }
 ?>

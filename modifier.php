@@ -292,6 +292,14 @@
         //Compteur de nombre de colonnes avec des valeurs non_utf_8
         $cpt_non_utf = 0;
         $non_utf8 = "";
+        //Récupère la liste des infos sur les types
+        $list_type = verif_type($colonnes,$table);
+        //Liste des champs n'ayant pas le bon type
+        $non_type = $list_type[0];
+        //Nombre de champs n'ayant pas le bon type
+        $cpt_non_type = $list_type[1];
+        //Booléen pour voir si il y a des mauvais types
+        $bool_type = $list_type[2];
         //Traitement spécial pour callsignsroutes
         if($table=="callsignsroutes")
         {
@@ -360,7 +368,7 @@
         <!----Affichage du bouton pour valider la requête ou non------->
         <?php
         //Si utf_8 à false alors n'affiche pas le bouton pour valider la requête
-        if($utf_8 == true)
+        if($utf_8 == true && $bool_type == true)
         {
             ?>
         <div id="bouton"><p> Êtes vous sûrs de vouloir exécuter cette requête ?</p>
@@ -396,11 +404,20 @@
         ?>
 
     <?php
+        //Messages d'erreurs en cas de mauvais type ou non utf_8
         if($utf_8 == false && $cpt_non_utf == 1){
-            echo "<p>La colonne : '$non_utf8' a des caractères non utf_8.</p>";
+            echo "<p id='erreur'>La colonne : $non_utf8 a des caractères non utf_8.</p>";
         }
         if($utf_8 == false && $cpt_non_utf > 1){
-            echo "<p>Les colonnes : '$non_utf8' ont des caractères non utf_8.</p>";
+            echo "<p id='erreur'>Les colonnes : $non_utf8 ont des caractères non utf_8.</p>";
+        }
+        if($bool_type == false && $cpt_non_type == 1)
+        {
+            echo "<p id='erreur'>La colonne : $non_type a un mauvais type de valeur.</p>";
+        }
+        if($bool_type == false && $cpt_non_type > 1)
+        {
+            echo "<p id='erreur'>Les colonnes : $non_type ont des mauvais types de valeur.</p>";
         }
     }
 ?>        <!--Appel du code javascript--> 

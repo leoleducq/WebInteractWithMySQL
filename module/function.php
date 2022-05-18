@@ -167,7 +167,8 @@ function tuples($db,$table,$primary_key,$primary_value){
     return $tuples;
 }
 
-//-------------------------------DECODAGE UTF_8-------------------------------------------
+//-------------------------------Nettoyage des données-------------------------------------------
+//Décodage utf_8
 function test_utf8($str)
 {
   if (is_array($str)) {
@@ -181,6 +182,7 @@ function test_utf8($str)
         return (utf8_encode(utf8_decode($str)) == $str);
     }
 }
+//Enlève les accents
 function unaccent($str)
 {
   $transliteration = array(
@@ -282,6 +284,51 @@ function unaccent($str)
                         array_values($transliteration),
                         $str);
     return $str;
+}
+
+function verif_type($colonnes,$table)
+{
+    //Vérifie si tous les champs ont des valeurs du bon type
+    $bool_type = true;
+    $cpt_non_type = 0;
+    $non_type ="";
+    //Pas besoin de vérification de type pour callsignsroutes
+    if($table != "callsignsroutes")
+    {
+        foreach($colonnes as $colonne)
+        {
+            //Récupère le nom de la colonne
+            $column = $colonne['Field'];
+            //Récupère la valeur de la colonne
+            //Permet de générer aucune erreur en modification lorsqu'il faut récupérer la clé primaire
+            if(isset($_GET['modifier']))
+            {
+                //Récupère la clé primaire dans le champ
+                $value = $_GET['primary_value'];   
+            }
+            else
+            {
+                //Récupère la valeur via le nom de la colonne
+                $value = $_GET[$column];
+            }
+            //Récupère le type de la colonne
+            $type = $colonne['Type'];
+            //Si le type du champ est un int
+            if(strpos($type,"int")=="true")
+            {
+                //Vérifie si la valeur est numérique
+                if(is_numeric($value) != 1)
+                {
+                    $non_type .= $column.",";
+                    $bool_type = false;
+                    $cpt_non_type++;
+                }
+            }
+        }
+    }
+    //Récupération de tous les champs
+    $verif = array($non_type,$cpt_non_type,$bool_type);
+    return $verif;
 }
 
 //-------------------------------TABLE AIRCRAFTS--------------------------------------
@@ -467,6 +514,7 @@ function modifier($db,$callsign,$fromairporticao,$toairporticao,$fromairportiata
     $final_request = "callsign='$callsign',routeicao='$routeicao',routeiata='$routeiata',$operator_request,flightnumber='',$final_request,nbroutestopsequences=0,vrsrouteid=0,updated='$current_date',updatedby='$user'";
     return $final_request;
 }
+
 
 ?>
 
