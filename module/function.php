@@ -299,8 +299,8 @@ function verif_type($colonnes,$table)
         {
             //Récupère le nom de la colonne
             $column = $colonne['Field'];
-            //Récupère la valeur de la colonne
-            $value = $_GET[$column] ??"";
+            //Récupère la valeur de la colonne, si en modification -> nul, alors récupère la clé primaire
+            $value = $_GET[$column] ?? $_GET['primary_value'];
             //Récupère le type de la colonne
             $type = $colonne['Type'];
             //Si le type du champ est un int
