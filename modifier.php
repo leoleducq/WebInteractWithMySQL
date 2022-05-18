@@ -304,40 +304,26 @@
             foreach($colonnes as $colonne)
             {
                 $colonne = $colonne['Field'];
+                $set.=$colonne."=";
                 //Si c'est la chaine de la clé primaire
                 if($tuple[$cpt] == $tuple[$primary_cpt])
                 {
-                    //Rajoute le nom de la colonne
-                    $set .= $colonne."=";
                     $value = $tuple[$cpt];
-                    //Enlève les accents
-                    $value = unaccent($value);
-                    //Vérification des chaines de caractères avant de les mettre dans la chaine de la requete
-                    if (!test_utf8($value))
-                    {
-                        $value = utf8_encode($value);
-                        $utf_8 = false;
-                        $non_utf8 .= $colonne.",";
-                        $cpt_non_utf ++;
-                    }
-                    $set .= "'".$value."',";
-                //Toutes les autres chaines
                 }
-                else{
-                    $set .= $colonne."=";
+                else
+                {
                     $value = $_GET[$colonne];
-                    //Enlève les accents
-                    $value = unaccent($value);
-                    //Vérification des chaines de caractères avant de les mettre dans la chaine de la requete
-                    if (!test_utf8($value))
-                    {
-                        $value = utf8_encode($value);
-                        $utf_8 = false;
-                        $non_utf8 .= $colonne.",";
-                        $cpt_non_utf ++;
-                    }
-                    $set .= "'".$value."',";
                 }
+                $value = unaccent($value);
+                //Vérification des chaines de caractères avant de les mettre dans la chaine de la requete
+                if (!test_utf8($value))
+                {
+                    $value = utf8_encode($value);
+                    $utf_8 = false;
+                    $non_utf8 .= $colonne.",";
+                    $cpt_non_utf ++;
+                }
+                $set .= "'".$value."',";
                 $cpt++;
             }
         }
