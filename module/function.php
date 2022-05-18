@@ -300,17 +300,7 @@ function verif_type($colonnes,$table)
             //Récupère le nom de la colonne
             $column = $colonne['Field'];
             //Récupère la valeur de la colonne
-            //Permet de générer aucune erreur en modification lorsqu'il faut récupérer la clé primaire
-            if(isset($_GET['modifier']))
-            {
-                //Récupère la clé primaire dans le champ
-                $value = $_GET['primary_value'];   
-            }
-            else
-            {
-                //Récupère la valeur via le nom de la colonne
-                $value = $_GET[$column];
-            }
+            $value = $_GET[$column] ??"";
             //Récupère le type de la colonne
             $type = $colonne['Type'];
             //Si le type du champ est un int
@@ -319,8 +309,11 @@ function verif_type($colonnes,$table)
                 //Vérifie si la valeur est numérique
                 if(is_numeric($value) != 1)
                 {
-                    $non_type .= $column.",";
+                    //Chaine avec les colonnes ayant un problème de type
+                    $non_type .= "$column($type),";
+                    //Passe le booléen type à false pour empêcher l'insertion de la requête
                     $bool_type = false;
+                    //Compte le nombre d'erreurs de type
                     $cpt_non_type++;
                 }
             }
