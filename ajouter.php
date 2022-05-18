@@ -263,6 +263,27 @@
         //Traitement spécial pour callsignsroutes
         if($table=="callsignsroutes")
         {
+            $list_get = array("callsign","fromairporticao","fromairportiata","toairporticao","toairportiata");
+            foreach($list_get as $get)
+            {
+                //Récupère la valeur des champs
+                $value = $_GET[$get];
+                //Enlève les accents
+                $value = unaccent($value);
+                //Si non_utf8
+                if (!test_utf8($value))
+                {
+                    //Décode la valeur
+                    $value = utf8_encode($value);
+                    //Passe le parametre utf8 à false pour empecher la requete
+                    $utf_8 = false;
+                    //Récupère les colonnes avec des valeurs non utf_8
+                    $non_utf8 .= $get.",";
+                    //Compte le nombre de colonnes avec des valeurs non utf-8
+                    $cpt_non_utf ++;
+                }
+                
+            }
             $add = ajouter($db,$_GET['callsign'],$_GET['fromairporticao'] ??"",$_GET['toairporticao']??"",$_GET['fromairportiata']??"",$_GET['toairportiata']??"");
         }
         else
