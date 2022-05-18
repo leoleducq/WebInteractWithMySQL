@@ -9,7 +9,7 @@ De plus, la tracabilité des changements / insertions était compliquée.
 Grâce à cette solution, les données sont vérifiées, nettoyées, ainsi que normalisées. Certains champs sont également remplis automatiquement en prenant les valeurs rentrées.<br>
 Le code est évidemment personnalisé pour nos besoins, mais est tout de même accessible à quiconque voulant intéragir plus facilement avec sa BDD.
 
-Version
+### Version
 | MySQL        | MariaDB           | PHP  |
 | ------------- |:-------------:| -----:|
 | 15.1      | 10.5.15 | 8.1.5 |
