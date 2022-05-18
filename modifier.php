@@ -141,6 +141,7 @@
                     {
                         //Permet de chercher si il y a des dependances liés à cette colonne
                         $valide_aircrafts = strpos($line,",");
+                        //Si la valeur display est sur la colonne alors on l'affiche
                         $valide_callsignsroutes = strpos($line,"display");
                         //Si il y a une virgule dans la ligne alors valide est oui
                         if(gettype($valide_aircrafts) =="integer"){$valide_aircrafts="oui";}
