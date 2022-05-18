@@ -295,6 +295,27 @@
         //Traitement spécial pour callsignsroutes
         if($table=="callsignsroutes")
         {
+            $list_get = array("fromairporticao","fromairportiata","toairporticao","toairportiata");
+            foreach($list_get as $get)
+            {
+                //Récupère la valeur des champs
+                $value = $_GET[$get];
+                //Enlève les accents
+                $value = unaccent($value);
+                //Si non_utf8
+                if (!test_utf8($value))
+                {
+                    //Décode la valeur
+                    $value = utf8_encode($value);
+                    //Passe le parametre utf8 à false pour empecher la requete
+                    $utf_8 = false;
+                    //Récupère les colonnes avec des valeurs non utf_8
+                    $non_utf8 .= $get.",";
+                    //Compte le nombre de colonnes avec des valeurs non utf-8
+                    $cpt_non_utf ++;
+                }
+                
+            }
             $set = modifier($db,$primary_value,$_GET['fromairporticao'] ??"",$_GET['toairporticao']??"",$_GET['fromairportiata']??"",$_GET['toairportiata']??"");
         }
         else
@@ -308,12 +329,15 @@
                 //Si c'est la chaine de la clé primaire
                 if($tuple[$cpt] == $tuple[$primary_cpt])
                 {
+                    //Récupère la valeur de la requête
                     $value = $tuple[$cpt];
                 }
                 else
                 {
+                    //Récupère la valeur rentré par l'utilisateur
                     $value = $_GET[$colonne];
                 }
+                //Enlève les accents
                 $value = unaccent($value);
                 //Vérification des chaines de caractères avant de les mettre dans la chaine de la requete
                 if (!test_utf8($value))
@@ -334,6 +358,11 @@
         $show_requete = "<b>UPDATE</b> $table <b>SET</b> $set <b>WHERE</b> $primary_key = '$primary_value'";
         ?>
         <!----Affichage du bouton pour valider la requête ou non------->
+        <?php
+        //Si utf_8 à false alors n'affiche pas le bouton pour valider la requête
+        if($utf_8 == true)
+        {
+            ?>
         <div id="bouton"><p> Êtes vous sûrs de vouloir exécuter cette requête ?</p>
             <p><?php echo $show_requete ?></p>
             <form action="" method="GET">
@@ -362,6 +391,9 @@
         ?>
             </form>
         </div>
+        <?php
+        }
+        ?>
 
     <?php
         if($utf_8 == false && $cpt_non_utf == 1){
