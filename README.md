@@ -17,8 +17,16 @@ Version
 ### Installation FR
 1. Copier ce répertoire : <code> git clone https://github.com/leoleducq/WebInteractWithMySQL.git </code>
 2. Modifier le fichier "config.cfg" avec vos identifiants de connexion à votre BDD.
-3. Possibilité d'ajouter des règles pour chaque table dans le fichier "specific_rules" si vous voulez les traiter différemment.
+3. Il y a 2 connexions pour la BDD : 
+* La 1ère : pour effectuer les requêtes
+* La 2ème : pour les utilisateurs souhaitant se connecter<br>
+⚠️ La table doit s'appeler "utilisateurs" sur la 2ème BDD et les mots de passe insérés avec la fonction : "password('votre_mot_de_passe')"
+4. Possibilité d'ajouter des règles pour chaque table dans le fichier "specific_rules" si vous voulez les traiter différemment.
 ### Installation ENG
 1. Clone this repository : <code> git clone https://github.com/leoleducq/WebInteractWithMySQL.git </code>
 2. Modify the config.cfg with the login of your BDD.
-3. You can add some rules in "specific_rules" if you have some tables that you want to treat a different way.
+3. There is 2 connexions for the BDD :
+* First : to execute request
+* Second : for user who want to connect<br>
+⚠️ The table has to be called "utilisateurs" on the second BDD and password has to be insert with the function : "password('your_password')"
+4. You can add some rules in "specific_rules" if you have some tables that you want to treat a different way.
