@@ -6,7 +6,12 @@ Ce code a été fait dans le but d'intéragir plus facilement avec notre BDD not
 En effet, certains de nos collaborateurs se plaignaient de l'accès à la BDD ainsi que la difficulté à rentrer de nouvelles données.<br>
 De plus, la tracabilité des changements / insertions était compliquée.
 ### Finalité
-Grâce à cette solution, les données sont vérifiées, nettoyées, ainsi que normalisées. Certains champs sont également remplis automatiquement en prenant les valeurs rentrées.<br>
+Grâce à cette solution, les données sont : 
+* Vérifiées 
+* Nettoyées
+* Normalisées
+
+Certains champs sont également remplis automatiquement en prenant les valeurs rentrées.<br>
 Le code est évidemment personnalisé pour nos besoins, mais est tout de même accessible à quiconque voulant intéragir plus facilement avec sa BDD.
 
 ### Version
@@ -16,7 +21,7 @@ Le code est évidemment personnalisé pour nos besoins, mais est tout de même a
 
 ### Installation FR
 1. Copier ce répertoire : <code> git clone https://github.com/leoleducq/WebInteractWithMySQL.git </code>
-2. Modifier le fichier ".config.cfg" avec vos identifiants de connexion à vos BDD.
+2. Modifier le fichier ".config.cfg" avec les identifiants de connexion à vos BDD.
 3. Il y a 2 connexions pour la BDD (Possibilité de mettre les mêmes informations pour les 2): 
 * La 1ère : pour effectuer les requêtes
 * La 2ème : pour les utilisateurs souhaitant se connecter<br>
