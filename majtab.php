@@ -14,7 +14,6 @@
     }
     if(empty(isset($_SESSION['username'])))
     {
-        echo " oeoeoeoe";
         header("location:login.php");
     }
     ?>      
