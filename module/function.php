@@ -3,7 +3,7 @@
 function get_config()
 {
     //Récupération des variables dans le fichier de config
-    $connect = file('config.cfg');
+    $connect = file('.config.cfg');
     foreach($connect as $line)
     {
         $pos = strpos($line, '=');
