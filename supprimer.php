@@ -65,7 +65,7 @@
             <input type="hidden" name="<?php echo $nom_filtre;?>" value="<?php echo $value_filtre;?>">
         </form>
         <!------------------Ferme la fenetre------------------------>
-        <form action="../majtab.php" method="GET">
+        <form action="../index.php" method="GET">
     <!---Input de type Hidden de toutes les données préalablement transmises------->
             <input type="submit" name="quitter" value="Annuler">
             <input type="hidden" name="table" value="<?php echo $table;?>">
@@ -93,7 +93,7 @@
                     $value_filtre = $_GET['filtre_'.$colonne];
                 }
             }
-            header("Location: ../majtab.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre");
+            header("Location: ../index.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre");
         }
         catch(Exception $e){
             die('Erreur : ' . $e->getMessage());

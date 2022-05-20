@@ -53,7 +53,7 @@
                 $value_filtre="";
             }
             //Redirection
-            header("Location: majtab.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre&primary_key=$primary_key&primary_value=$primary_value");
+            header("Location: index.php?table=$table&nb_debut_ligne=$nb_debut_ligne&nb_lignes=$nb_lignes&showtri=$showtri&$nom_filtre=$value_filtre&primary_key=$primary_key&primary_value=$primary_value");
         }
         catch(Exeption $e){
             die('Erreur : ' . $e->getMessage());
@@ -236,7 +236,7 @@
         }
         ?>
     </form>
-    <form action="majtab.php" method="GET">
+    <form action="index.php" method="GET">
     <!---Input de type Hidden de toutes les données préalablement transmises------->
         <input type="submit" name="quitter" value="Retour">
         <input type="hidden" name="table" value="<?php echo $table;?>">
