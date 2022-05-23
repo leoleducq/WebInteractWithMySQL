@@ -19,6 +19,24 @@ Le code est évidemment personnalisé pour nos besoins, mais est tout de même a
 | ------------- |:-------------:| -----:|
 | 15.1      | 10.5.15 | 8.1.5 |
 
+### Structure
+├── [module](./module)  
+│   ├── [function.php](./module/function.php)  
+├── [script](./script)  
+│   ├── [main.js](./script/main.js)  
+├── [style](./style)  
+│   ├── [login.css](./style/login.css)  
+│   ├── [main.css](./style/main.css)  
+│   ├── [modifaddsupp.css](./style/modifaddsupp.css)  
+├── [.config.cfg](./.config.cfg)  
+├── [README.md](./README.md)  
+├── [ajouter.php](./ajouter.php)  
+├── [index.php](./index.php)  
+├── [login.php](./login.php)  
+├── [modifier.php](./modifier.php)  
+├── [specific_rules](./specific_rules)  
+├── [supprimer.php](./supprimer.php)
+
 ### Installation FR
 1. Copier ce répertoire : <code> git clone https://github.com/leoleducq/WebInteractWithMySQL.git </code>
 2. Modifier le fichier ".config.cfg" avec les identifiants de connexion à vos BDD.
