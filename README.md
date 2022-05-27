@@ -49,8 +49,8 @@ Le code est évidemment personnalisé pour nos besoins, mais est tout de même a
 * Si votre table n'a pas de <b>clé primaire</b> vous pourrez seulement la <b>consulter</b>, la <b>modification</b> et la <b>suppression</b> de tuples ne fonctionneront pas.
 ### Installation ENG
 1. Clone this repository : <code> git clone https://github.com/leoleducq/WebInteractWithMySQL.git </code>
-2. Modify the [.config.cfg](./.config.cfg) with the login of your BDD.
-3. There is 2 connexions for the BDD (Possibility to have the same informations for both):
+2. Modify the [.config.cfg](./.config.cfg) with the login of your DB.
+3. There is 2 connexions for the DB (Possibility to have the same informations for both):
 * First : to execute request
 * Second : for user who want to connect<br>
 ` The table has to be called "utilisateurs" on the second BDD and password has to be insert with the function : "password('your_password')" `
