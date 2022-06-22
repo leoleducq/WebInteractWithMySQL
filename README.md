@@ -2,7 +2,7 @@
 ### Description 
 Fait pour intéragir plus facilement avec sa base de données MySQL.
 ### Pourquoi ?
-Ce code a été fait dans le but d'intéragir plus facilement avec notre BDD notamment pour nos collaborateurs.<br>
+Ce projet a été fait dans le but d'intéragir plus facilement avec notre BDD notamment pour nos collaborateurs.<br>
 En effet, certains de nos collaborateurs se plaignaient de l'accès à la BDD ainsi que la difficulté à rentrer de nouvelles données.<br>
 De plus, la tracabilité des changements / insertions était compliquée.
 ### Finalité
@@ -12,12 +12,29 @@ Grâce à cette solution, les données sont :
 * Normalisées
 
 Certains champs sont également remplis automatiquement en prenant les valeurs rentrées.<br>
-Le code est évidemment personnalisé pour nos besoins, mais est tout de même accessible à quiconque voulant intéragir plus facilement avec sa BDD.
+Le code est évidemment adapté à nos besoins, mais est tout de même accessible à quiconque voulant intéragir plus facilement avec sa BDD.
 
 ### Version
-| MySQL        | MariaDB           | PHP  |
-| ------------- |:-------------:| -----:|
-| 15.1      | 10.5.15 | 8.1.5 |
+<table>
+    <thead>
+        <tr>
+            <th colspan="1">Web</th>
+            <th colspan="2">Stockage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PHP</td>
+            <td>MySQL</td>
+            <td>MariaDB</td>
+        </tr>
+        <tr>
+            <td>8.1.5</td>
+            <td>15.1</td>
+            <td>1.5.15</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Structure
 ├── [module](./module)  
